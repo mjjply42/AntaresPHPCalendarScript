@@ -1,0 +1,66 @@
+Mail Answer to: ben@antarestech.com
+
+------------------------------------------------------------------------------------------
+PHP Skills Assignment:
+------------------------------------------------------------------------------------------
+
+Write a PHP class that can output a calendar month in plain text. Then use the class in a 
+PHP script that can be run on the command line, taking a month as a number, and a 4 digit 
+year as input arguments.  The script should output 3 months worth of calendars,
+starting at the month and year that were entered as the command line argument.  
+
+The script should produce correct output regardless of what the input starting month is.
+
+The class and command line script can all be in the same file. Please write original
+code, do not attach any additional libraries.
+
+
+For example:
+
+$ php answer.php 1 2020
+
+The script should output calendars for January 2020, February 2020, and March 2020,
+like this:
+
+
+--------------------
+January 2020
+--------------------
+Su Mo Tu We Th Fr Sa 
+--------------------
+          1  2  3  4 
+ 5  6  7  8  9 10 11 
+12 13 14 15 16 17 18 
+19 20 21 22 23 24 25 
+26 27 28 29 30 31    
+--------------------
+
+
+--------------------
+February 2020
+--------------------
+Su Mo Tu We Th Fr Sa 
+--------------------
+                   1 
+ 2  3  4  5  6  7  8 
+ 9 10 11 12 13 14 15 
+16 17 18 19 20 21 22 
+23 24 25 26 27 28 29 
+--------------------
+
+
+--------------------
+March 2020
+--------------------
+Su Mo Tu We Th Fr Sa 
+--------------------
+ 1  2  3  4  5  6  7 
+ 8  9 10 11 12 13 14 
+15 16 17 18 19 20 21 
+22 23 24 25 26 27 28 
+29 30 31             
+--------------------
+
+
+
+
