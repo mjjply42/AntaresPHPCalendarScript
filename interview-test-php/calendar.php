@@ -33,7 +33,7 @@ class Calendar {
         return ($calendarDays);
     }
 
-    public function printCalendar($month, $year, $monthArray) {
+    public function fillCalendar($month, $year, $monthArray) {
         $dash = "--------------------\n";
         $weekNames = "Su Mo Tu We Th Fr Sa\n";
         $dateObj = DateTime::createFromFormat('!m', ((int)$month));
@@ -58,7 +58,7 @@ function getErrorByCode($code) {
             "suggestion" => "\033[32m---Correct Examples---\n01 2020\n12 1992\n03 209\n----------------------\033[0m\n"
         ],
         2=>[
-            "message" => "\033[33m Year cannot be less than 1970.\033[0m\n\n", 
+            "message" => "\033[33m Year has to be 1970 at the minimum.\033[0m\n\n", 
             "suggestion" => "\033[32m---Correct Examples---\n01 2020\n12 1992\n03 209\n----------------------\033[0m\n"
         ],
         3=>[
@@ -125,7 +125,7 @@ function errorChecker($arg) {
         }
         $monthArray = (getMonthOutput($month, $year));
         $cal = new Calendar;
-        $cal->printCalendar($month, $year, $monthArray);
+        $cal->fillCalendar($month, $year, $monthArray);
         $month++;
         $monthCount--;
     }
