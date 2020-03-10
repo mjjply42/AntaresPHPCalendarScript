@@ -1,4 +1,50 @@
 <?php
+class Calendar {
+    private function formatCalendarDays($firstDay, $monthArray) {
+        $dayMatch = ["Sun"=>0, "Mon"=>1, "Tue"=>2, "Wed"=>3, "Thu"=>4, "Fri"=>5, "Sat"=>6];
+        $calendarDays = "";
+        $emptyDay = "  ";
+        $nextDay = " ";
+        $beginning = true;
+        $day = 1;
+        for ($i = 1; $i < (count($monthArray) + $dayMatch[$firstDay] + 1); $i++)
+        {
+            if ($dayMatch[$firstDay] == ($i -1))
+                $beginning = false;
+            if ($beginning)
+            {
+                $calendarDays .= $emptyDay.$nextDay;
+                continue;
+            }
+            if ($day > 9)
+                $calendarDays .= $day;
+            else
+            {
+                $calendarDays .= $nextDay;
+                $calendarDays .= $day;
+            }
+            if ($i % 7 == 0 && ($i + 1) < (count($monthArray) + $dayMatch[$firstDay] + 1))
+                $calendarDays .= "\n";
+            else
+                $calendarDays .= $nextDay;
+            $day++;
+        }
+        $calendarDays .= "\n";
+        return ($calendarDays);
+    }
+
+    public function printCalendar($month, $year, $monthArray) {
+        $dash = "--------------------\n";
+        $weekNames = "Su Mo Tu We Th Fr Sa\n";
+        $dateObj = DateTime::createFromFormat('!m', ((int)$month));
+        $monthName = $dateObj->format('F');
+        $calendarDate = $monthName." ".$year."\n";
+        $firstDay = (explode("-", $monthArray[0]))[3];
+        $calendarDays = $this->formatCalendarDays($firstDay, $monthArray);
+        echo $dash.$calendarDate.$dash.$weekNames.$dash.$calendarDays.$dash;
+        echo "\n\n\n";
+    }
+}
 
 function getErrorByCode($code) {
     $errorHeader = "\033[31mERROR:\033[0m";
@@ -63,51 +109,6 @@ function errorChecker($arg) {
     return (1);
 }
 
-function formatCalendarDays($firstDay, $monthArray) {
-    $dayMatch = ["Sun"=>0, "Mon"=>1, "Tue"=>2, "Wed"=>3, "Thu"=>4, "Fri"=>5, "Sat"=>6];
-    $calendarDays = "";
-    $emptyDay = "  ";
-    $nextDay = " ";
-    $beginning = true;
-    $day = 1;
-    for ($i = 1; $i < (count($monthArray) + $dayMatch[$firstDay] + 1); $i++)
-    {
-        if ($dayMatch[$firstDay] == ($i -1))
-            $beginning = false;
-        if ($beginning)
-        {
-            $calendarDays .= $emptyDay.$nextDay;
-            continue;
-        }
-        if ($day > 9)
-            $calendarDays .= $day;
-        else
-        {
-            $calendarDays .= $nextDay;
-            $calendarDays .= $day;
-        }
-        if ($i % 7 == 0 && ($i + 1) < (count($monthArray) + $dayMatch[$firstDay] + 1))
-            $calendarDays .= "\n";
-        else
-            $calendarDays .= $nextDay;
-        $day++;
-    }
-    $calendarDays .= "\n";
-    return ($calendarDays);
-}
-
-function printCalendar($month, $year, $monthArray) {
-    $dash = "--------------------\n";
-    $weekNames = "Su Mo Tu We Th Fr Sa\n";
-    $dateObj = DateTime::createFromFormat('!m', ((int)$month));
-    $monthName = $dateObj->format('F');
-    $calendarDate = $monthName." ".$year."\n";
-    $firstDay = (explode("-", $monthArray[0]))[3];
-    $calendarDays = formatCalendarDays($firstDay, $monthArray);
-    echo $dash.$calendarDate.$dash.$weekNames.$dash.$calendarDays.$dash;
-    echo "\n\n\n";
-}
-
 (function($argv) {
     $error = 0;
     $monthCount = 3;
@@ -123,7 +124,8 @@ function printCalendar($month, $year, $monthArray) {
             $month = 1;
         }
         $monthArray = (getMonthOutput($month, $year));
-        printCalendar($month, $year, $monthArray);
+        $cal = new Calendar;
+        $cal->printCalendar($month, $year, $monthArray);
         $month++;
         $monthCount--;
     }
