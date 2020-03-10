@@ -38,10 +38,10 @@ class Calendar {
         $weekNames = "Su Mo Tu We Th Fr Sa\n";
         $dateObj = DateTime::createFromFormat('!m', ((int)$month));
         $monthName = $dateObj->format('F');
-        $calendarDate = $monthName." ".$year."\n";
+        $calendarTitle = $monthName." ".$year."\n";
         $firstDay = (explode("-", $monthArray[0]))[3];
         $calendarDays = $this->formatCalendarDays($firstDay, $monthArray);
-        echo $dash.$calendarDate.$dash.$weekNames.$dash.$calendarDays.$dash;
+        echo $dash.$calendarTitle.$dash.$weekNames.$dash.$calendarDays.$dash;
         echo "\n\n\n";
     }
 }
